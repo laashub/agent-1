@@ -164,15 +164,15 @@ blocks:
 
       epilogue:
         commands:
-          - ssh administrator@windowsrnd.semaphoreci.com -i windows.pem "rmdir /S /Q agent"
+          - ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null administrator@windowsrnd.semaphoreci.com -i windows.pem "rmdir /S /Q agent"
 
       jobs:
         - name: Build
           commands:
             - chmod 400 windows.pem
-            - ssh administrator@windowsrnd.semaphoreci.com -i windows.pem "git clone https://github.com/semaphoreci/agent.git"
-            - ssh administrator@windowsrnd.semaphoreci.com -i windows.pem "cd agent & git checkout $SEMAPHORE_GIT_BRANCH"
-            - ssh administrator@windowsrnd.semaphoreci.com -i windows.pem "cd agent & go get && go build"
+            - ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null administrator@windowsrnd.semaphoreci.com -i windows.pem "git clone https://github.com/semaphoreci/agent.git"
+            - ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null administrator@windowsrnd.semaphoreci.com -i windows.pem "cd agent & git checkout $SEMAPHORE_GIT_BRANCH"
+            - ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null administrator@windowsrnd.semaphoreci.com -i windows.pem "cd agent & go get && go build"
 
 promotions:
   - name: Release
